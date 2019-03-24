@@ -2,8 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
-import PostTeaser from '../components/PostTeaser/PostTeaser';
-import Posts from '../data/posts.json';
+import PostList from '../components/PostList/PostList';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -71,17 +70,7 @@ const HomePage = props => {
     </div>
 
     {/* Featured Posts */}
-      <Grid 
-      container
-      spacing={24}
-      direction="row"
-      justify="space-evenly"
-      alignItems="center"
-      >
-        { Posts.map((post, index) =>
-            <PostTeaser key={index} post={post} />
-        )}
-       </Grid>
+      <PostList />
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>

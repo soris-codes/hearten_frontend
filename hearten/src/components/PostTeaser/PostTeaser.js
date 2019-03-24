@@ -27,14 +27,14 @@ function PostTeaser(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={post.image}
+          image={post.imagePrompt}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {post.title}
           </Typography>
           <Typography component="p">
-            {post.prompt}
+            {post.created_on}
           </Typography>
         </CardContent>
       </CardActionArea>
