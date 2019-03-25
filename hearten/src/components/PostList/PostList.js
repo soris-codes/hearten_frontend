@@ -32,8 +32,8 @@ class PostList extends Component {
         alignItems="center"
         >
           { this.state.posts ? this.state.posts.map((post, index) =>
-              <PostTeaser key={index} post={post} />) : <p>Loading...</p>
-          }
+              <PostTeaser key={index} post={post} />): <p>Loading...</p>
+        }
        </Grid>
     )
   }  

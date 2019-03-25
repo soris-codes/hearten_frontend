@@ -12,7 +12,7 @@ class PostForm extends Component {
       redirect: false,
       title: "",
       body: "",
-      imagePrompt: "https://images.unsplash.com/photo-1552055915-53d13beae39e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=400&fit=crop&ixid=eyJhcHBfaWQiOjF9",
+      imagePrompt: "",
       textPrompt: ""
     }
 

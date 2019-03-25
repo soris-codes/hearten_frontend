@@ -9,17 +9,17 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-    maxWidth: 345,
+    maxWidth: 800,
     marginBottom: 30,
     marginTop: 30,
    
   },
   media: {
-    height: 140,
+    height: 400,
   },
 }
 
-function PostTeaser(props) {
+function Post(props) {
   const { classes } = props
   const post = props.post
   const date_created = new Date(post.created_on)
@@ -29,7 +29,7 @@ function PostTeaser(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={post.imagePrompt}
+          image={post.imagePrompt ? post.imagePrompt : null}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -38,15 +38,20 @@ function PostTeaser(props) {
           <Typography component="p">
             {date_created.toLocaleString()}  
           </Typography>
+          <Typography component="h4">
+            Prompt: {post.textPrompt ? post.textPrompt : null}  
+          </Typography>
+          <Typography component="p">
+            {post.body}  
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
   )
 }
 
-PostTeaser.propTypes = {
+Post.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(PostTeaser)
-
+export default withStyles(styles)(Post)
