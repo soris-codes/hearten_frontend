@@ -4,19 +4,17 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-// import PostsAPI from '../../api/PostsAPI'
+import PostsAPI from '../../api/PostsAPI';
 
 class PostForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
+ 
+    state = {
       redirect: false,
       title: "",
       body: "",
-      image: "https://images.unsplash.com/photo-1552055915-53d13beae39e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=400&fit=crop&ixid=eyJhcHBfaWQiOjF9",
-      prompt: ""
+      imagePrompt: "https://images.unsplash.com/photo-1552055915-53d13beae39e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=400&fit=crop&ixid=eyJhcHBfaWQiOjF9",
+      textPrompt: ""
     }
-  }
 
   getRandomImage() {
     fetch('https://source.unsplash.com/random/400x400')
@@ -35,23 +33,36 @@ class PostForm extends Component {
   }
 
   handleChange(event){
-    // console.log(this.state)
     const item = event.target.name
     const value = event.target.value
+    // console.log("Input >>", item, value )
     this.setState({
       [item]: value
     })
   }
 
+  createPostObject() {
+    const postObject = {}
+    postObject.title = this.state.title
+    postObject.body = this.state.body
+    if(this.state.imagePrompt) {
+      postObject.imagePrompt = this.state.imagePrompt
+    }
+    if(this.state.textPrompt) {
+      postObject.textPrompt = this.state.textPrompt
+    }
+    return postObject
+  }
+
   handleAdd(event){
     event.preventDefault()
-    console.log("ADD >>")
-    // const postObject = this.createPostObject()
-    // PostsAPI.addPost(postObject)
-    // .then((response) => {
-    //   console.log(response)
-    //   this.setState({ redirect: true }) })
-    // .catch(error => console.error(error))
+    const postObject = this.createPostObject()
+    console.log("ADD >>", postObject)
+    PostsAPI.addPost(postObject)
+    .then((response) => {
+      console.log(response)
+      this.setState({ redirect: true }) })
+    .catch(error => console.error(error))
   }
 
   handleUpdate(event){
@@ -83,9 +94,9 @@ class PostForm extends Component {
           return(
           <Grid container>
             <Paper>
-            { this.state.image ? <img item src={this.state.image} alt="Visual Prompt"/> : 
+            { this.state.imagePrompt ? <img src={this.state.imagePrompt} alt="Visual Prompt"/> : 
             <p>No image found</p>}
-            <form item
+            <form 
               onSubmit={this.props.postID ?       this.handleUpdate.bind(this) : 
               this.handleAdd.bind(this)}
               >
@@ -100,9 +111,10 @@ class PostForm extends Component {
               <TextField
                 id="standard-textarea"
                 name="body"
+                value={this.state.body}
                 placeholder="And so it begins..."
                 multiline
-                // className={classes.textField}
+                onChange={this.handleChange.bind(this)}
                 margin="normal"
                 variant="outlined"
                 fullWidth
@@ -123,7 +135,7 @@ class PostForm extends Component {
   render() {
     const { redirect } = this.state;
       if (redirect) {
-      return <Redirect to = {`/posts`}/>
+      return <Redirect to = {`/`}/>
     }
     return (
       this.renderForm()
@@ -132,3 +144,5 @@ class PostForm extends Component {
 }
 
 export default PostForm;
+
+

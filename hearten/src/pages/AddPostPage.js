@@ -1,10 +1,11 @@
 import React from 'react';
+import PostForm from '../components/PostForm/PostForm';
 
 const AddPostPage = props => {
 
     return (
       <div>
-        <h2>New Journal Entry:</h2> 
+        <PostForm requestType="Add"/>
       </div>
     )
   }

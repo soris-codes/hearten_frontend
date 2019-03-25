@@ -74,10 +74,10 @@ const HomePage = props => {
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Hearten by Soris Cox - April 2019
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          <a href = "https://github.com/soris-codes/hearten_frontend">Source Code</a>
         </Typography>
       </footer>
       </React.Fragment>
