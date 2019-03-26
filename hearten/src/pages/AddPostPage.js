@@ -6,7 +6,7 @@ const AddPostPage = props => {
     return (
       <div>
         <PostForm
-        postID={null} 
+        post={null} 
         requestType="Publish"/>
       </div>
     )

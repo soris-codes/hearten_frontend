@@ -41,6 +41,9 @@ class PostForm extends Component {
         textPrompt: post.textPrompt
       })
     }
+    if(this.props.requestType === 'Delete') {
+      this.handleDelete()
+    }
 
   }
 
@@ -97,27 +100,49 @@ class PostForm extends Component {
   handleUpdate(event){
     event.preventDefault();
     console.log("UPDATE >>", event.target.value)
-    // const postObject = this.createEditedPostObject()
-    // PostsAPI.editPost(this.props.post.id, postObject)
-    // .then((response) => {
-    // console.log(response)
-    // this.setState({ redirect: true })})
-    // .catch(error => console.error(error))
+    const postObject = this.createEditedPostObject()
+    PostsAPI.editPost(this.props.post.id, postObject)
+    .then((response) => {
+    console.log(response)
+    this.setState({ redirect: true,
+      successfulSubmission: true})})
+    .catch(error => console.error(error))
   }
 
-  handleDelete(event){
-    event.preventDefault();
-    console.log("DELETE >>")
-    // PostsAPI.deletePost(this.props.postID)
-    //   .then((response) => {
-    //   console.log(response)
-    //   this.setState({ redirect: true }) })
-    //   .catch(error => console.error(error))
+  handleDelete(){
+    console.log("DELETE >>", this.props.post.id)
+    PostsAPI.deletePost(this.props.post.id)
+      .then((response) => {
+      console.log(response)
+      this.setState({ redirect: true,
+      successfulSubmission: true }) })
+      .catch(error => console.error(error))
   }
 
   renderForm() {
     const requestType = this.props.requestType
     switch(requestType) {
+      case 'Delete':
+        return(<Paper><p>Deleting entry...</p></Paper>)
+      // return(
+      //   <Grid container>
+      //     <Paper>
+      //       Are you sure you want to delete this entry?
+      //       <form >
+      //         <Button 
+      //         color="secondary" 
+      //         variant="contained"
+      //         onClick={this.handleDelete}
+      //         >
+      //         YES!
+      //         </Button>
+      //         <Button color="primary" variant="contained" type="submit">
+      //         NO
+      //         </Button>
+      //       </form>
+      //     </Paper>
+      //   </Grid>
+      //   )
       case 'Update':
       case 'Publish':
           return(
@@ -126,7 +151,7 @@ class PostForm extends Component {
             { this.state.imagePrompt ? <img src={this.state.imagePrompt} alt="Visual Prompt"/> : 
             <p>Image Loading...</p>}
             <form 
-              onSubmit={this.props.post.id ?       this.handleUpdate.bind(this) : 
+              onSubmit={this.props.post ?       this.handleUpdate.bind(this) : 
               this.handleAdd.bind(this)}
               >
               <TextField
@@ -166,6 +191,7 @@ class PostForm extends Component {
     const renderConfirmation = () => {
       return (<Snackbar
         open={this.state.successfulSubmission}
+        autoHideDuration={6000}
         message={`Your Post was Successfully ${this.props.requestType}ed.`}
     />)
     }

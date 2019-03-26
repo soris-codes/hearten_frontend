@@ -6,17 +6,18 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import PostForm from '../PostForm/PostForm';
 
 const styles = {
   card: {
-    maxWidth: 800,
+    maxWidth: 600,
     marginBottom: 30,
     marginTop: 30,
    
   },
   media: {
-    height: 400,
+    height: 600,
   },
 }
 
@@ -24,13 +25,21 @@ class Post extends Component {
 
   state = {
     editMode: false,
+    deleteMode: false,
   }
 
-  toggleEditMode = (event) =>{
+  toggleEditMode = (event) => {
     this.setState({
       editMode: !this.state.editMode
     })
   }
+
+  handleClickDelete = (event) => {
+    this.setState({
+      deleteMode: !this.state.deleteMode
+    })
+  }
+
 
   render () {
     const { classes } = this.props
@@ -41,7 +50,7 @@ class Post extends Component {
     const renderPost = () => {
       return (
         <Card className={classes.card}>
-          <CardActionArea onClick={this.toggleEditMode}>
+          {/* <CardActionArea onClick={this.toggleEditMode}> */}
             <CardMedia
               className={classes.media}
               image={post.imagePrompt ? post.imagePrompt : null}
@@ -60,13 +69,35 @@ class Post extends Component {
                 {post.body}  
               </Typography>
             </CardContent>
-          </CardActionArea>
+            <Button 
+            onClick={this.toggleEditMode}
+            color="primary"
+            variant="outlined"
+            >Edit</Button>
+            <Button 
+            onClick={this.handleClickDelete}
+            color="secondary"
+            variant="outlined"
+            >Delete</Button>
+          {/* </CardActionArea> */}
         </Card>
       )
     }
 
     return(
-      <div>{ this.state.editMode ? <PostForm post={post}requestType="Update" /> : renderPost()}</div>
+      <div>{ this.state.editMode ? 
+        <PostForm 
+        post={post}
+        requestType="Update" 
+        />: 
+        renderPost()}
+        { this.state.deleteMode ? 
+        <PostForm 
+        post={post}
+        requestType="Delete" 
+        />: 
+        null}
+      </div>
     )
     
   }

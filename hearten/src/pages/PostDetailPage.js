@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Post from '../components/Post/Post';
 import PostsAPI from '../api/PostsAPI';
 
-class PostPage extends Component {
+class PostDetailPage extends Component {
 
   state = {
     post: null
@@ -14,6 +14,9 @@ class PostPage extends Component {
       this.setState({
         post: jsonData
       })
+    })
+    .catch(error => {
+      alert(`Error: ${error}`)
     })
   }
 
@@ -27,4 +30,4 @@ class PostPage extends Component {
   }
 }
 
-export default PostPage;
+export default PostDetailPage;

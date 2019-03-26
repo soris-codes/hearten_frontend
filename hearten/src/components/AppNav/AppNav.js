@@ -14,12 +14,13 @@ const AppNav = () => {
         <div>
         <AppBar position="static">
             <Toolbar>
-                <Typography 
-                variant="h6" 
-                color="inherit"
-                  >
-                Hearten
-                </Typography>
+                <Button 
+                label="Home"
+                color="inherit" 
+                href='/'  
+                >
+                HOME
+                </Button>
                 <Button 
                 label="Create a Journal Entry"
                 color="inherit" 
@@ -27,6 +28,12 @@ const AppNav = () => {
                 >
                 Create a Journal Entry
                 </Button>
+                <Typography 
+                variant="h6" 
+                color="inherit"
+                  >
+                Hearten
+                </Typography>
             </Toolbar>  
         </AppBar>
         </div>
