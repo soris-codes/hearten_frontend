@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Snackbar from '@material-ui/core/Snackbar';
 import PostsAPI from '../../api/PostsAPI';
 
 class PostForm extends Component {
  
     state = {
       redirect: false,
+      successfulSubmission: false,
       title: "",
       body: "",
       imagePrompt: "",
@@ -21,15 +23,25 @@ class PostForm extends Component {
     .then((response) => {
       console.log(response.url)
       this.setState({
-        image: response.url
+        imagePrompt: response.url
       })
     })
   }
 
   componentDidMount() {
-    // if(this.props.requestType === 'Add') {
-    //   this.getRandomImage()
-    // }
+    if(this.props.requestType === 'Publish') {
+      this.getRandomImage()
+    }
+    if(this.props.requestType === 'Update') {
+      const post = this.props.post
+      this.setState({
+        title: post.title,
+        body: post.body,
+        imagePrompt: post.imagePrompt,
+        textPrompt: post.textPrompt
+      })
+    }
+
   }
 
   handleChange(event){
@@ -61,15 +73,32 @@ class PostForm extends Component {
     PostsAPI.addPost(postObject)
     .then((response) => {
       console.log(response)
-      this.setState({ redirect: true }) })
+      this.setState({ 
+        redirect: true,
+        successfulSubmission: true
+      }) 
+    })
     .catch(error => console.error(error))
+  }
+
+  createEditedPostObject() {
+    const postObject = {}
+    const post = this.props.post
+    if(post.title !== this.state.title) {
+      postObject.title = this.state.title
+    }
+    if(post.body !== this.state.body) {
+      postObject.body = this.state.body
+    }
+    console.log("EDITED >>",postObject)
+    return postObject
   }
 
   handleUpdate(event){
     event.preventDefault();
     console.log("UPDATE >>", event.target.value)
-    // const postObject = this.createPostObject()
-    // PostsAPI.editPost(this.props.post.category, this.props.postID, postObject)
+    // const postObject = this.createEditedPostObject()
+    // PostsAPI.editPost(this.props.post.id, postObject)
     // .then((response) => {
     // console.log(response)
     // this.setState({ redirect: true })})
@@ -90,14 +119,14 @@ class PostForm extends Component {
     const requestType = this.props.requestType
     switch(requestType) {
       case 'Update':
-      case 'Add':
+      case 'Publish':
           return(
           <Grid container>
             <Paper>
             { this.state.imagePrompt ? <img src={this.state.imagePrompt} alt="Visual Prompt"/> : 
-            <p>No image found</p>}
+            <p>Image Loading...</p>}
             <form 
-              onSubmit={this.props.postID ?       this.handleUpdate.bind(this) : 
+              onSubmit={this.props.post.id ?       this.handleUpdate.bind(this) : 
               this.handleAdd.bind(this)}
               >
               <TextField
@@ -133,12 +162,22 @@ class PostForm extends Component {
   }
 
   render() {
-    const { redirect } = this.state;
-      if (redirect) {
-      return <Redirect to = {`/`}/>
+
+    const renderConfirmation = () => {
+      return (<Snackbar
+        open={this.state.successfulSubmission}
+        message={`Your Post was Successfully ${this.props.requestType}ed.`}
+    />)
     }
+
+    const handleSuccess = (props) => {
+      renderConfirmation()
+      return(<Redirect to={'/'}/>) 
+    }
+
     return (
-      this.renderForm()
+      <div>{ this.state.successfulSubmission ? 
+        handleSuccess() : this.renderForm()}</div>
     );
   }
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import PostForm from '../components/PostForm/PostForm';
 
-const AddPostPage = props => {
+const EditPostPage = props => {
 
     return (
       <div>
         <PostForm
-        postID={null} 
-        requestType="Publish"/>
+        postID={this.props.match.params.postID} 
+        requestType="Update"/>
       </div>
     )
   }
 
-export default AddPostPage;
+export default EditPostPage;

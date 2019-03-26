@@ -6,6 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const styles = {
   card: {
@@ -24,9 +25,13 @@ function PostTeaser(props) {
   const post = props.post
   const date_created = new Date(post.created_on)
   console.log(date_created)
+  
+  const handleClick = () => {
+    console.log("CLICKED!", post.id)
+  }
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           className={classes.media}
           image={post.imagePrompt}
@@ -35,9 +40,10 @@ function PostTeaser(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {post.title}
           </Typography>
-          <Typography component="p">
+          <Typography component="p" gutterBottom>
             {date_created.toLocaleString()}  
           </Typography>
+          <Link to={`/posts/${post.id}`}>View Post</Link>
         </CardContent>
       </CardActionArea>
     </Card>
