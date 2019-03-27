@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Post from '../components/Post/Post';
 import PostsAPI from '../api/PostsAPI';
+import Grid from '@material-ui/core/Grid';
 
 class PostDetailPage extends Component {
 
@@ -23,9 +24,14 @@ class PostDetailPage extends Component {
   render() {
     console.log(this.state.post)
     return (
-      <div>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center">
+        
       {this.state.post ? <Post post={this.state.post}/> : <h2>Loading...</h2> } 
-    </div>
+    </Grid>
     )
   }
 }

@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import PostForm from '../PostForm/PostForm';
 
-const styles = {
+const styles = theme => ({
   card: {
     maxWidth: 600,
     marginBottom: 30,
@@ -19,7 +19,10 @@ const styles = {
   media: {
     height: 600,
   },
-}
+  button: {
+    margin: theme.spacing.unit,
+  },
+})
 
 class Post extends Component {
 
@@ -73,11 +76,13 @@ class Post extends Component {
             onClick={this.toggleEditMode}
             color="primary"
             variant="outlined"
+            className={classes.button}
             >Edit</Button>
             <Button 
             onClick={this.handleClickDelete}
             color="secondary"
             variant="outlined"
+            className={classes.button}
             >Delete</Button>
           {/* </CardActionArea> */}
         </Card>

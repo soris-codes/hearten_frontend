@@ -55,7 +55,11 @@ const HomePage = props => {
         <div className={classes.heroButtons}>
           <Grid container spacing={16} justify="center">
             <Grid item>
-              <Button variant="contained" color="primary">
+              <Button 
+              variant="contained" 
+              color="primary"
+              href="/login"
+              >
                 Log In
               </Button>
             </Grid>
