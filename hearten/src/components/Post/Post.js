@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -53,7 +52,6 @@ class Post extends Component {
     const renderPost = () => {
       return (
         <Card className={classes.card}>
-          {/* <CardActionArea onClick={this.toggleEditMode}> */}
             <CardMedia
               className={classes.media}
               image={post.imagePrompt ? post.imagePrompt : null}
@@ -84,7 +82,6 @@ class Post extends Component {
             variant="outlined"
             className={classes.button}
             >Delete</Button>
-          {/* </CardActionArea> */}
         </Card>
       )
     }

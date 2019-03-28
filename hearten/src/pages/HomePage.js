@@ -1,9 +1,9 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import PostList from '../components/PostList/PostList';
-import { withStyles } from '@material-ui/core/styles';
+import PostList from '../components/PostList/PostList'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
 
@@ -35,46 +35,46 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6,
   },
-});
+})
 
 const HomePage = props => {
   const { classes } = props
 
-    return (
-      <React.Fragment>
+  return (
+    <React.Fragment>
       <main>
         {/* Login Splash Screen */}
-      <div className={classes.heroUnit}>
-      <div className={classes.heroContent}>
-        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Hearten
-        </Typography>
-        <Typography variant="h6" align="center" color="textSecondary" paragraph>
-          Creative journaling to inspire confidence in your writing 
-        </Typography>
-        <div className={classes.heroButtons}>
-          <Grid container spacing={16} justify="center">
-            <Grid item>
-              <Button 
-              variant="contained" 
-              color="primary"
-              href="/login"
-              >
-                Log In
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button variant="outlined" color="primary">
-                Sign Up
-              </Button>
-            </Grid>
-          </Grid>
+        <div className={classes.heroUnit}>
+          <div className={classes.heroContent}>
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            Hearten
+            </Typography>
+            <Typography variant="h6" align="center" color="textSecondary" paragraph>
+            Creative journaling to inspire confidence in your writing 
+            </Typography>
+            <div className={classes.heroButtons}>
+              <Grid container spacing={16} justify="center">
+                <Grid item>
+                  <Button 
+                    variant="contained" 
+                    color="primary"
+                    href="/login"
+                  >
+                  Log In
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="outlined" color="primary">
+                  Sign Up
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    {/* Featured Posts */}
-      <PostList />
+        {/* Featured Posts */}
+        <PostList />
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
@@ -84,9 +84,9 @@ const HomePage = props => {
           <a href = "https://github.com/soris-codes/hearten_frontend">Source Code</a>
         </Typography>
       </footer>
-      </React.Fragment>
-    );
-  }
+    </React.Fragment>
+  )
+}
 
 
-export default withStyles(styles)(HomePage);
+export default withStyles(styles)(HomePage)

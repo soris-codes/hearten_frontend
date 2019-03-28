@@ -1,60 +1,58 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import ToolbarGroup from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 // import AccessAlarmIcon from '@material-ui/icons/AccessAlarm'
 // import HomeIcon from '@material-ui/icons/Home'
 // import IconButton from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button/'
-import { Link } from 'react-router-dom'; 
 
 const styles = {
-    root: {
-      flexGrow: 1,
-    },
-    grow: {
-      flexGrow: 1,
-    },
-  };
+  root: {
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  }
+}
 
 const AppNav = (props) => {
-    const { classes } = props;
-    return(
-        <div className={classes.root}>
-        <AppBar position="static">
-            <Toolbar>
-                <Typography 
-                variant="h6" 
-                color="inherit"
-                className={classes.grow}
-                  >
+  const { classes } = props
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography
+            variant="h6"
+            color="inherit"
+            className={classes.grow}
+          >
                 Hearten
-                </Typography>
-                <Button 
-                label="Home"
-                color="inherit" 
-                href='/'  
-                >
+          </Typography>
+          <Button
+            label="Home"
+            color="inherit"
+            href='/'
+          >
                 HOME
-                </Button>
-                <Button 
-                label="Create a Journal Entry"
-                color="inherit" 
-                href='/new'  
-                >
+          </Button>
+          <Button
+            label="Create a Journal Entry"
+            color="inherit"
+            href='/new'
+          >
                 Create a Journal Entry
-                </Button>
-            </Toolbar>  
-        </AppBar>
-        </div>
-    )
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
 }
 
 AppNav.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
+  classes: PropTypes.object.isRequired
+}
   
-  export default withStyles(styles)(AppNav);
+export default withStyles(styles)(AppNav)

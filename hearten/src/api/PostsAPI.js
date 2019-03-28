@@ -5,7 +5,7 @@ const addPost = (postObject) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(postObject)
   })
 }
@@ -15,7 +15,7 @@ const editPost = (postID, postObject) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    method: "PATCH",
+    method: 'PATCH',
     body: JSON.stringify(postObject)
   })
 }
@@ -23,17 +23,16 @@ const editPost = (postID, postObject) => {
 const deletePost = (postID) => {
   return fetch(`${API}${postID}/`, { 
     method: 'DELETE' 
-  });
+  })
 }
 
 const fetchPostByID = (postID) => {
-  return fetch(`${API}${postID}/`)
-  .then((data) => data.json())
+  return fetch(`${API}${postID}/`).then((data) => data.json())
 }
 
 const fetchPosts = () => {
   return fetch(`${API}`)
-  .then((data) => data.json())
+    .then((data) => data.json())
 }
 
 export default {

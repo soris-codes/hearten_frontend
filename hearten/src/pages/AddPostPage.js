@@ -1,15 +1,15 @@
-import React from 'react';
-import PostForm from '../components/PostForm/PostForm';
+import React from 'react'
+import PostForm from '../components/PostForm/PostForm'
 
 const AddPostPage = props => {
 
-    return (
-      <div>
-        <PostForm
+  return (
+    <div>
+      <PostForm
         post={null} 
         requestType="Publish"/>
-      </div>
-    )
-  }
+    </div>
+  )
+}
 
-export default AddPostPage;
+export default AddPostPage
