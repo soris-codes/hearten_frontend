@@ -24,11 +24,13 @@ const styles = theme => ({
 })
 
 class Post extends Component {
-
-  state = {
+  constructor(props){
+    super(props)
+    this.state = {
     editMode: false,
     deleteMode: false,
   }
+}
 
   toggleEditMode = (event) => {
     this.setState({

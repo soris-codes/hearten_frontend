@@ -1,25 +1,46 @@
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
   Redirect
-} from 'react-router';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Snackbar from '@material-ui/core/Snackbar';
-import PostsAPI from '../../api/PostsAPI';
+} from 'react-router'
+import withStyles from '@material-ui/core/styles/withStyles'
+import PropTypes from 'prop-types'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import Snackbar from '@material-ui/core/Snackbar'
+import PostsAPI from '../../api/PostsAPI'
+
+const styles = theme => ({
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing.unit,
+  },
+  submit: {
+    marginTop: theme.spacing.unit * 3,
+  },
+})
 
 class PostForm extends Component {
-
-  state = {
-    redirect: false,
-    successfulSubmission: false,
-    title: "",
-    body: "",
-    imagePrompt: "",
-    textPrompt: ""
+  constructor(props){
+    super(props)
+    this.state = {
+      redirect: false,
+      successfulSubmission: false,
+      title: '',
+      body: '',
+      imagePrompt: '',
+      textPrompt: ''
+    }
   }
 
   getRandomImage() {
@@ -76,7 +97,7 @@ class PostForm extends Component {
   handleAdd(event) {
     event.preventDefault()
     const postObject = this.createPostObject()
-    console.log("ADD >>", postObject)
+    console.log('ADD >>', postObject)
     PostsAPI.addPost(postObject)
       .then((response) => {
         console.log(response)
@@ -97,13 +118,13 @@ class PostForm extends Component {
     if (post.body !== this.state.body) {
       postObject.body = this.state.body
     }
-    console.log("EDITED >>", postObject)
+    console.log('EDITED >>', postObject)
     return postObject
   }
 
   handleUpdate(event) {
-    event.preventDefault();
-    console.log("UPDATE >>", event.target.value)
+    event.preventDefault()
+    console.log('UPDATE >>', event.target.value)
     const postObject = this.createEditedPostObject()
     PostsAPI.editPost(this.props.post.id, postObject)
       .then((response) => {
@@ -117,7 +138,7 @@ class PostForm extends Component {
   }
 
   handleDelete() {
-    console.log("DELETE >>", this.props.post.id)
+    console.log('DELETE >>', this.props.post.id)
     PostsAPI.deletePost(this.props.post.id)
       .then((response) => {
         console.log(response)
@@ -130,109 +151,125 @@ class PostForm extends Component {
   }
 
   renderForm() {
-      const requestType = this.props.requestType
-      switch (requestType) {
-        case 'Delete':
-          return ( <Paper><p> Deleting entry... </p></Paper> )
-          // return(
-          //   <Grid container>
-          //     <Paper>
-          //       Are you sure you want to delete this entry?
-          //       <form >
-          //         <Button 
-          //         color="secondary" 
-          //         variant="contained"
-          //         onClick={this.handleDelete}
-          //         >
-          //         YES!
-          //         </Button>
-          //         <Button color="primary" variant="contained" type="submit">
-          //         NO
-          //         </Button>
-          //       </form>
-          //     </Paper>
-          //   </Grid>
-          //   )
-        case 'Update':
-        case 'Publish':
-          return ( 
-          <Grid container >
-              <Paper> {
-                this.state.imagePrompt ? 
-                <img src = { this.state.imagePrompt }
+    const { classes } = this.props
+    const requestType = this.props.requestType
+    switch (requestType) {
+    case 'Delete':
+      return ( <Paper><p> Deleting entry... </p></Paper> )
+      // return(
+      //   <Grid container>
+      //     <Paper>
+      //       Are you sure you want to delete this entry?
+      //       <form >
+      //         <Button 
+      //         color="secondary" 
+      //         variant="contained"
+      //         onClick={this.handleDelete}
+      //         >
+      //         YES!
+      //         </Button>
+      //         <Button color="primary" variant="contained" type="submit">
+      //         NO
+      //         </Button>
+      //       </form>
+      //     </Paper>
+      //   </Grid>
+      //   )
+    case 'Update':
+    case 'Publish':
+      return ( 
+        <Grid 
+          container
+          spacing={12}
+          direction="row"
+          justify="space-evenly"
+          alignItems="center" >
+          <Paper className={classes.paper}> {
+            this.state.imagePrompt ? 
+              <img src = { this.state.imagePrompt }
                 alt = "Visual Prompt" /> :
-                  <p> Image Loading... </p>} 
-                  <form 
-                  onSubmit = { this.props.post ? this.handleUpdate.bind(this) : this.handleAdd.bind(this)
-                }>
-                <TextField
-                id = "standard-name"
-                placeholder = "Title"
-                name = "title"
-                value = {
-                  this.state.title
-                }
-                onChange = {
-                  this.handleChange.bind(this)
-                }
-                margin = "normal" />
-                <TextField
-                id = "standard-textarea"
-                name = "body"
-                value = {
-                  this.state.body
-                }
-                placeholder = "And so it begins..."
-                multiline
-                onChange = {
-                  this.handleChange.bind(this)
-                }
-                margin = "normal"
-                variant = "outlined"
-                fullWidth />
-                <Button variant = "outlined"
-                type = "submit" > {
-                  this.props.requestType
-                } 
-                </Button> 
-                </form> 
-                </Paper> 
-                </Grid>)
-                default: alert("Invalid Form Request Type!")
-                return ( <h1> ERROR! </h1>)
-                }
+              <p> Image Loading... </p>} 
+          <form 
+            className={classes.form}
+            onSubmit = { this.props.post ? this.handleUpdate.bind(this) : this.handleAdd.bind(this)
+            }>
+            <TextField
+              id = "standard-name"
+              placeholder = "Title"
+              name = "title"
+              value = {
+                this.state.title
               }
+              onChange = {
+                this.handleChange.bind(this)
+              }
+              margin = "normal"
+              fullWidth />
+            <TextField
+              id = "standard-textarea"
+              name = "body"
+              value = {
+                this.state.body
+              }
+              placeholder = "And so it begins..."
+              multiline
+              onChange = {
+                this.handleChange.bind(this)
+              }
+              margin = "normal"
+              variant = "outlined"
+              fullWidth />
+            <Button 
+              variant = "outlined"
+              type = "submit"
+              className={classes.submit}
+            > {
+                this.props.requestType
+              } 
+            </Button> 
+          </form> 
+          </Paper> 
+        </Grid>)
+    default: alert('Invalid Form Request Type!')
+      return ( <h1> ERROR! </h1>)
+    }
+  }
 
-              render() {
+  render() {
 
-                const renderConfirmation = () => {
-                  return ( < Snackbar open = {
-                      this.state.successfulSubmission
-                    }
-                    autoHideDuration = {
-                      6000
-                    }
-                    message = {
-                      `Your Post was Successfully ${this.props.requestType}ed.`
-                    }
-                    />)
-                  }
+    const renderConfirmation = () => {
+      return ( < Snackbar open = {
+        this.state.successfulSubmission
+      }
+      autoHideDuration = {
+        3000
+      }
+      message = {
+        `Your Post was Successfully ${this.props.requestType}d.`
+      }
+      />)
+    }
 
-                  const handleSuccess = (props) => {
-                    renderConfirmation()
-                    return ( < Redirect to = {
-                        '/'
-                      }
-                      />) 
-                    }
+    const handleSuccess = () => {
+      return renderConfirmation()
+      // return ( < Redirect to = {
+      //   '/posts'
+      // }
+      // />
+      // ) 
+    }
 
-                    return ( 
-                    <div > {
-                        this.state.successfulSubmission ?
-                        handleSuccess() : this.renderForm()
-                      } </div>
-                    );
-                  }
-                }
+    return ( 
+      <div > {
+        this.state.successfulSubmission ?
+          handleSuccess() : this.renderForm()
+      } </div>
+    )
+  }
+}
 
-                export default PostForm
+PostForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(PostForm)

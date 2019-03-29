@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import Post from '../components/Post/Post';
-import PostsAPI from '../api/PostsAPI';
-import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import Post from '../components/Post/Post'
+import PostsAPI from '../api/PostsAPI'
+import Grid from '@material-ui/core/Grid'
+import { Link } from 'react-router-dom'
 
 class PostDetailPage extends Component {
-
-  state = {
-    post: null
+  constructor(props){
+    super(props)
+    this.state = {
+      post: null
+    }
   }
 
   componentDidMount() {
@@ -33,10 +35,10 @@ class PostDetailPage extends Component {
         <h2>Loading...</h2 >
       }
       <Link to={'/posts'}>Back</Link>
-      </Grid>
+    </Grid>
       
     )
   }
 }
 
-export default PostDetailPage;
+export default PostDetailPage

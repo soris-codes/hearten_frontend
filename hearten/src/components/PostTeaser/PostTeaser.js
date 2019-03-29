@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom'
 
 const styles = {
   card: {
-    maxWidth: 345,
+    minWidth: 300,
+    maxWidth: 400,
     marginBottom: 30,
     marginTop: 30
 

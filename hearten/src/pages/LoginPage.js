@@ -1,5 +1,5 @@
-import { Component } from 'react'
-// import UsersAPI from '../api/UsersAPI'
+import React, { Component } from 'react'
+import UsersAPI from '../api/UsersAPI'
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
@@ -51,14 +51,15 @@ class LoginPage extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('LOGIN SUBMITTED!')
-    // const credObject = {
-    //   email: event.target.elements[0].value,
-    //   password: event.target.elements[1].value
-    // }
-    // UsersAPI.login(credObject)
-    // .then((response) => response.json())
-    // .then((user) => this.props.handleLogin(user))
+    console.log('LOGIN SUBMITTED BY >>', event.target.elements[0].value)
+    const credObject = {
+      username: event.target.elements[0].value,
+      password: event.target.elements[1].value
+    }
+    UsersAPI.login(credObject)
+      .then((response) => response.json())
+      // .then((response) => console.log(response))
+      .then((user) => this.props.handleLogin(user))
     // this.props.history.push('/')
   }
 
@@ -75,7 +76,10 @@ class LoginPage extends Component {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          <form className={classes.form}>
+          <form 
+            className={classes.form}
+            onSubmit={this.handleSubmit.bind(this)}
+          >
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="username">Username</InputLabel>
               <Input id="username" name="username" autoFocus />
