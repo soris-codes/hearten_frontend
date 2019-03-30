@@ -2,10 +2,11 @@ const API = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.c
 
 const local = 'http://localhost:8000/api/posts/'
 
-const addPost = (postObject) => {
+const addPost = (postObject, token) => {
   return fetch(`${local}`, {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': token
     },
     method: 'POST',
     body: JSON.stringify(postObject)
@@ -32,8 +33,13 @@ const fetchPostByID = (postID) => {
   return fetch(`${local}${postID}/`).then((data) => data.json())
 }
 
-const fetchPosts = () => {
-  return fetch(`${local}`)
+const fetchPosts = (token) => {
+  return fetch(`${local}`, {
+    headers: {
+      'Authorization': `Token ${token}`
+    },
+    method: 'POST',
+  })
     .then((data) => data.json())
 }
 

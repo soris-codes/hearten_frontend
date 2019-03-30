@@ -24,7 +24,6 @@ function PostTeaser (props) {
   const { classes } = props
   const post = props.post
   const date_created = new Date(post.created_on)
-  console.log(date_created)
 
   return (
     <Card className={classes.card}>

@@ -12,12 +12,16 @@ class PostList extends Component {
   }
 
   fetchAllPosts() {
-    PostsAPI.fetchPosts()
-      .then((jsonData) => {
-        this.setState({
-          posts: jsonData
-        })
-      })
+    console.log('POSTLIST >>', this.props.user)
+    // if(this.props.user !== null){
+    //   PostsAPI.fetchPosts(this.props.user.token)
+    //     .then((jsonData) => {
+    //       this.setState({
+    //         posts: jsonData
+    //       })
+    //     })
+    // }
+    
   }
 
   componentDidMount() {

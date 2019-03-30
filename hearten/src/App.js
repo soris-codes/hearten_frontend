@@ -4,9 +4,13 @@ import './App.css'
 import AppNav from './components/AppNav/AppNav'
 import HomePage from './pages/HomePage'
 import AddPostPage from './pages/AddPostPage'
-import LoginPage from './pages/LoginPage'
+import Login from './components/Login/Login'
 import PostDetailPage from './pages/PostDetailPage'
+import PostList from './components/PostList/PostList'
+import Register from './components/Register/Register'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Grid from '@material-ui/core/Grid'
+import UsersAPI from './api/UsersAPI'
 
 class App extends Component {
   constructor(props){
@@ -17,13 +21,15 @@ class App extends Component {
   }
 
   handleLogin(user) {
-    console.log('USER >> ', user)
     this.setState({
       user: user
     })
+    console.log('USER >> ', user)
   }
 
   userLogout () {
+    //Need function call here to return token to API for true logout
+    UsersAPI.logout(this.state.user['token'])
     this.setState({user: null})
   }
 
@@ -34,16 +40,27 @@ class App extends Component {
     }
     const renderLogin = (props) => {
       return(
-        <LoginPage 
+        <Login 
           history={props.history} 
           handleLogin={(user) => this.handleLogin(user)} />
+      )
+    }
+
+    const renderUserPosts = (props) => {
+      return(
+        <Grid container 
+          direction = "column"
+          justify = "center"
+          alignItems = "center"> 
+          <PostList user={this.state.user} />
+        </Grid>
       )
     }
 
     const renderLogout = (props) => {
       this.userLogout()
       return(
-        <Redirect to={'/login'}/>
+        <Redirect to={'/'}/>
       )
     }
   
@@ -52,16 +69,16 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          {/* Pass a user prop to AppNav component once login is working to change visible options Login/Logout, Create Entry */}
-          <AppNav />
+          <AppNav user={this.state.user}/>
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />
-              <Route exact path='/new' component={AddPostPage} />
-              <Route exact path='/posts' component={HomePage} />
+              <Route exact path='/posts/new' component={AddPostPage} />
+              <Route exact path='/posts' render={renderUserPosts} />
               <Route exact path='/posts/:postID' component={PostDetailPage} />
               <Route exact path='/login' render={renderLogin} />
               <Route exact path='/logout' render={renderLogout} />
+              <Route exact path='/register' component={Register} />
               <Route render={renderPageNotFound}/>
             </Switch>
           </div>

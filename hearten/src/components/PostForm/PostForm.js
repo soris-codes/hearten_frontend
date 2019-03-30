@@ -10,7 +10,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import Snackbar from '@material-ui/core/Snackbar'
 import PostsAPI from '../../api/PostsAPI'
 
 const styles = theme => ({
@@ -156,25 +155,6 @@ class PostForm extends Component {
     switch (requestType) {
     case 'Delete':
       return ( <Paper><p> Deleting entry... </p></Paper> )
-      // return(
-      //   <Grid container>
-      //     <Paper>
-      //       Are you sure you want to delete this entry?
-      //       <form >
-      //         <Button 
-      //         color="secondary" 
-      //         variant="contained"
-      //         onClick={this.handleDelete}
-      //         >
-      //         YES!
-      //         </Button>
-      //         <Button color="primary" variant="contained" type="submit">
-      //         NO
-      //         </Button>
-      //       </form>
-      //     </Paper>
-      //   </Grid>
-      //   )
     case 'Update':
     case 'Publish':
       return ( 
@@ -237,26 +217,13 @@ class PostForm extends Component {
 
   render() {
 
-    const renderConfirmation = () => {
-      return ( < Snackbar open = {
-        this.state.successfulSubmission
-      }
-      autoHideDuration = {
-        3000
-      }
-      message = {
-        `Your Post was Successfully ${this.props.requestType}d.`
-      }
-      />)
-    }
-
     const handleSuccess = () => {
-      return renderConfirmation()
-      // return ( < Redirect to = {
-      //   '/posts'
-      // }
-      // />
-      // ) 
+      // return renderConfirmation()
+      return ( < Redirect to = {
+        '/posts'
+      }
+      />
+      ) 
     }
 
     return ( 
