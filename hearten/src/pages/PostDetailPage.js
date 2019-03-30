@@ -13,7 +13,7 @@ class PostDetailPage extends Component {
   }
 
   componentDidMount() {
-    PostsAPI.fetchPostByID(this.props.match.params.postID)
+    PostsAPI.fetchPostByID(this.props.match.params.postID, localStorage.getItem('userToken'))
       .then((jsonData) => {
         this.setState({
           post: jsonData

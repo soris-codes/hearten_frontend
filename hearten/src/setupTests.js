@@ -7,3 +7,7 @@ configure({ adapter: new Adapter() })
 global.shallow = shallow
 global.render = render
 global.mount = mount
+
+// Make Jest-Fetch-Mock available in all files without importing
+global.fetch = require('jest-fetch-mock')
+

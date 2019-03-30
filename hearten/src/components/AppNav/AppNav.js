@@ -24,13 +24,19 @@ const AppNav = (props) => {
     return (
       <>
       <Button
+        label="Home"
+        color="inherit"
+        href='/posts'>
+        MY HOME
+      </Button>
+      <Button
         label="Create a Journal Entry"
         color="inherit"
         href='/posts/new'>
-        Create a Journal Entry
+        ADD AN ENTRY
       </Button>
       <Button
-        label="LOGOUT"
+        label="Logout"
         color="inherit"
         href='/logout'>
         LOGOUT
@@ -45,24 +51,9 @@ const AppNav = (props) => {
           <Typography
             variant="h6"
             color="inherit"
-            className={classes.grow}
-          >
+            className={classes.grow}>
                 Hearten
           </Typography>
-          <Button
-            label="Home"
-            color="inherit"
-            href='/'
-          >
-                HOME
-          </Button>
-          {/* <Button
-            label="Create a Journal Entry"
-            color="inherit"
-            href='/posts/new'
-          >
-                Create a Journal Entry
-          </Button> */}
           { user ? authLinks(): null}
         </Toolbar>
       </AppBar>

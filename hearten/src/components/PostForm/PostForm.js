@@ -38,7 +38,6 @@ class PostForm extends Component {
       title: '',
       body: '',
       imagePrompt: '',
-      textPrompt: ''
     }
   }
 
@@ -62,7 +61,6 @@ class PostForm extends Component {
         title: post.title,
         body: post.body,
         imagePrompt: post.imagePrompt,
-        textPrompt: post.textPrompt
       })
     }
     if (this.props.requestType === 'Delete') {
@@ -87,17 +85,15 @@ class PostForm extends Component {
     if (this.state.imagePrompt) {
       postObject.imagePrompt = this.state.imagePrompt
     }
-    if (this.state.textPrompt) {
-      postObject.textPrompt = this.state.textPrompt
-    }
     return postObject
   }
 
   handleAdd(event) {
     event.preventDefault()
     const postObject = this.createPostObject()
-    console.log('ADD >>', postObject)
-    PostsAPI.addPost(postObject)
+    const token = localStorage.getItem('userToken')
+    console.log('ADD >>', postObject, token)
+    PostsAPI.addPost(postObject, token)
       .then((response) => {
         console.log(response)
         this.setState({
@@ -125,7 +121,7 @@ class PostForm extends Component {
     event.preventDefault()
     console.log('UPDATE >>', event.target.value)
     const postObject = this.createEditedPostObject()
-    PostsAPI.editPost(this.props.post.id, postObject)
+    PostsAPI.editPost(this.props.post.id, postObject, localStorage.getItem('userToken'))
       .then((response) => {
         console.log(response)
         this.setState({
@@ -138,7 +134,7 @@ class PostForm extends Component {
 
   handleDelete() {
     console.log('DELETE >>', this.props.post.id)
-    PostsAPI.deletePost(this.props.post.id)
+    PostsAPI.deletePost(this.props.post.id, localStorage.getItem('userToken') )
       .then((response) => {
         console.log(response)
         this.setState({
@@ -160,7 +156,7 @@ class PostForm extends Component {
       return ( 
         <Grid 
           container
-          spacing={12}
+          spacing={16}
           direction="row"
           justify="space-evenly"
           alignItems="center" >
@@ -169,6 +165,7 @@ class PostForm extends Component {
               <img src = { this.state.imagePrompt }
                 alt = "Visual Prompt" /> :
               <p> Image Loading... </p>} 
+          </Paper>
           <form 
             className={classes.form}
             onSubmit = { this.props.post ? this.handleUpdate.bind(this) : this.handleAdd.bind(this)
@@ -208,7 +205,6 @@ class PostForm extends Component {
               } 
             </Button> 
           </form> 
-          </Paper> 
         </Grid>)
     default: alert('Invalid Form Request Type!')
       return ( <h1> ERROR! </h1>)
@@ -218,7 +214,6 @@ class PostForm extends Component {
   render() {
 
     const handleSuccess = () => {
-      // return renderConfirmation()
       return ( < Redirect to = {
         '/posts'
       }

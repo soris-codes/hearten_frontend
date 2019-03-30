@@ -6,31 +6,40 @@ const addPost = (postObject, token) => {
   return fetch(`${local}`, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token
+      'Authorization': `Token ${token}`
     },
     method: 'POST',
     body: JSON.stringify(postObject)
   })
 }
 
-const editPost = (postID, postObject) => {
+const editPost = (postID, postObject, token) => {
   return fetch(`${local}${postID}/`, {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
     },
     method: 'PATCH',
     body: JSON.stringify(postObject)
   })
 }
 
-const deletePost = (postID) => {
+const deletePost = (postID, token) => {
   return fetch(`${local}${postID}/`, { 
+    headers: {
+      'Authorization': `Token ${token}`
+    },
     method: 'DELETE' 
   })
 }
 
-const fetchPostByID = (postID) => {
-  return fetch(`${local}${postID}/`).then((data) => data.json())
+const fetchPostByID = (postID, token) => {
+  return fetch(`${local}${postID}/`, {
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  })
+    .then((data) => data.json())
 }
 
 const fetchPosts = (token) => {
@@ -38,7 +47,6 @@ const fetchPosts = (token) => {
     headers: {
       'Authorization': `Token ${token}`
     },
-    method: 'POST',
   })
     .then((data) => data.json())
 }

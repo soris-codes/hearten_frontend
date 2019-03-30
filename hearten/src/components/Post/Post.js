@@ -62,13 +62,10 @@ class Post extends Component {
               <Typography gutterBottom variant="h5" component="h2">
                 {post.title}
               </Typography>
-              <Typography component="p" gutterBottom>
+              <Typography variant="caption" gutterBottom>
                 {date_created.toLocaleString()}  
               </Typography>
-              <Typography component="h4" gutterBottom>
-                {post.textPrompt ? post.textPrompt : null}  
-              </Typography>
-              <Typography paragraph>
+              <Typography variant="body1" paragraph>
                 {post.body}  
               </Typography>
             </CardContent>
