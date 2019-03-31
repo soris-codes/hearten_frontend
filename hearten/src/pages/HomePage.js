@@ -1,8 +1,5 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import PostList from '../components/PostList/PostList'
 import Hero from '../components/Hero/Hero'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -15,6 +12,7 @@ const styles = theme => ({
 })
 
 const HomePage = props => {
+
   const { classes } = props
 
   return (
@@ -33,6 +31,5 @@ const HomePage = props => {
     </React.Fragment>
   )
 }
-
 
 export default withStyles(styles)(HomePage)

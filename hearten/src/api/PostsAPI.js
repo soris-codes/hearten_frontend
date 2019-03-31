@@ -1,9 +1,9 @@
-const API = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/'
+const API = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/posts/'
 
-const local = 'http://localhost:8000/api/posts/'
+const LOCAL = 'http://localhost:8000/api/posts/'
 
 const addPost = (postObject, token) => {
-  return fetch(`${local}`, {
+  return fetch(`${API}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Token ${token}`
@@ -14,7 +14,7 @@ const addPost = (postObject, token) => {
 }
 
 const editPost = (postID, postObject, token) => {
-  return fetch(`${local}${postID}/`, {
+  return fetch(`${API}${postID}/`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Token ${token}`
@@ -25,7 +25,7 @@ const editPost = (postID, postObject, token) => {
 }
 
 const deletePost = (postID, token) => {
-  return fetch(`${local}${postID}/`, { 
+  return fetch(`${API}${postID}/`, { 
     headers: {
       'Authorization': `Token ${token}`
     },
@@ -34,7 +34,7 @@ const deletePost = (postID, token) => {
 }
 
 const fetchPostByID = (postID, token) => {
-  return fetch(`${local}${postID}/`, {
+  return fetch(`${API}${postID}/`, {
     headers: {
       'Authorization': `Token ${token}`
     }
@@ -43,7 +43,7 @@ const fetchPostByID = (postID, token) => {
 }
 
 const fetchPosts = (token) => {
-  return fetch(`${local}`, {
+  return fetch(`${API}`, {
     headers: {
       'Authorization': `Token ${token}`
     },

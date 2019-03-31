@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+
 import UsersAPI from '../../api/UsersAPI'
+
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -49,6 +50,28 @@ const styles = theme => ({
 
 class Login extends Component {
 
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      isLoggedIn: false
+    }
+  }
+  
+  updateState() {
+    console.log('LOGIN: isLoggedIn')
+    this.setState({
+      isLoggedIn: true
+    })
+  }
+
+  // componentDidMount() {
+  //   const user = localStorage.getItem('userName')
+  //   if(user !== null) {
+  //     this.updateState()
+  //   }
+  // }
+
   handleSubmit(event) {
     event.preventDefault()
     console.log('LOGIN SUBMITTED BY >>', event.target.elements[0].value)
@@ -64,14 +87,24 @@ class Login extends Component {
       .catch(err => {
         console.error(err)
         alert('Error logging in please try again')
+        this.props.history.push('/')
       })
 
-    //Redirect user to their list of posts
-    this.props.history.push('/posts')
+    //Set isLoggedIn to true to be redirected to the user posts
+    this.updateState()  
   }
 
+
   render() {
+    const loggedIn  = this.state.isLoggedIn
     const { classes } = this.props
+
+    if(loggedIn === true) {
+      return(
+        <Redirect to={{pathname: '/posts',
+          state: { from: this.props.location}}} />
+      )
+    }
 
     return (
       <main className={classes.main}>
@@ -95,10 +128,6 @@ class Login extends Component {
               <InputLabel htmlFor="password">Password</InputLabel>
               <Input name="password" type="password" id="password" autoComplete="current-password" />
             </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth

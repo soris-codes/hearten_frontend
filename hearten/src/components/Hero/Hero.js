@@ -7,13 +7,13 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => ({
 
   heroUnit: {
-    backgroundColor: theme.palette.background.paper,
-    // backgroundImage: 'url(\'https://images.unsplash.com/photo-1553450646-bd2a35fa7c9f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=400&fit=crop&ixid=eyJhcHBfaWQiOjF9\')',
-    // backgroundRepeat: 'no-repeat',
-    // backgroundPosition: 'center',
-    // backgroundSize: 'cover',
-    // backgroundAttachment: 'fixed',
-    // height: '100%'
+    // backgroundColor: theme.palette.background.paper,
+    backgroundImage: 'url(\'https://images.unsplash.com/photo-1462243156358-1c52d30e9c76?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9\')',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
+    height: '100%'
   },
   heroContent: {
     maxWidth: 600,

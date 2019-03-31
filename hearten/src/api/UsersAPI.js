@@ -1,6 +1,6 @@
-const LOGIN = 'http://localhost:8000/api/auth/login'
-const LOGOUT = 'http://localhost:8000/api/auth/logout'
-const REGISTER = 'http://localhost:8000/api/auth/register'
+const LOGIN = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/auth/login'
+const LOGOUT = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/auth/logout'
+const REGISTER = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/auth/register'
 
 const login = (credentialsObject) => {
   return fetch(`${LOGIN}`,{

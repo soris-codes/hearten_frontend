@@ -17,7 +17,8 @@ const styles = {
 
 const AppNav = (props) => {
   const { classes } = props
-  const user = props.user
+  // const user = props.user
+  const user = localStorage.getItem('userName')
   console.log('APPNAV', user)
 
   const authLinks = () => {

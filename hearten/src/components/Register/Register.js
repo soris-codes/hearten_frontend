@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import UsersAPI from '../../api/UsersAPI'
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar'
@@ -46,16 +47,13 @@ const styles = theme => ({
 
 export class Register extends Component {
 
-  // constructor(props) {
-  //   super(props)
+  constructor(props) {
+    super(props)
   
-  //   this.state = {
-  //     username: '',
-  //     email: '',
-  //     password: '',
-  //     password2: ''
-  //   }
-  // }
+    this.state = {
+      isRegistered: false
+    }
+  }
 
   handleSubmit(event) {
     event.preventDefault()
@@ -75,12 +73,12 @@ export class Register extends Component {
         console.error(err)
         alert('Error logging in please try again')
       })
-
-    //Provide the user a confirmation??
       
     //Once a user has registered, a token is returned
     //so we can redirect to their posts
-    this.props.history.push('/posts')
+    this.setState({
+      isRegistered: true
+    })
   }
 
   handleChange(event) {
@@ -92,6 +90,13 @@ export class Register extends Component {
   render() {
 
     const { classes } = this.props
+    const registered = this.state.isRegistered
+
+    if(registered) {
+      return(
+        <Redirect to='/posts' />
+      )
+    }
   
     return (
       <main className={classes.main}>

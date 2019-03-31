@@ -10,8 +10,7 @@ import PostList from './components/PostList/PostList'
 import Register from './components/Register/Register'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
+
 
 import UsersAPI from './api/UsersAPI'
 
@@ -28,14 +27,15 @@ class App extends Component {
   //When a user has successfully been authenticated and has a 
   //token, set state, save token and user in localStorage
   handleLogin(user) {
+    console.log('APP: LOGIN HANDLED')
     this.setState({
       user: user
     })
     localStorage.setItem('userName', user.user.username)
     localStorage.setItem('userToken', user.token)
     // console.log('LOCAL USER >> ', localStorage.getItem('userName'))
-    // const token = this.state.user.token
-    // console.log('TOKEN!', token)
+    const token = this.state.user.token
+    console.log('APP: TOKEN!', token)
   }
 
   //Logs off from API server so token is destroyed/invalidated,
@@ -45,7 +45,7 @@ class App extends Component {
     console.log('LOGOUT >>', token)
     UsersAPI.logout(token)
       .then((response) => {
-        console.log(response)
+        console.log('LOGOUT >>', response)
         this.setState({user: null})
       })
       .catch(error => console.error(error))
@@ -74,17 +74,17 @@ class App extends Component {
       )
     }
 
-    const renderUserPosts = () => {
-      return(
-        <PostList user={localStorage.getItem('userToken')} />
-      )
-    }
-
     const renderLogout = () => {
       this.handleLogout()
       return(
         <Redirect to={'/'}/>
       )
+    }
+
+    const renderPostList = (props) => {
+      console.log('APP: Rendering post list >>', this.state.user)
+      return(
+        <PostList user={localStorage.getItem('userToken')} />)
     }
   
     return (
@@ -92,12 +92,12 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <AppNav user={localStorage.getItem('userToken')}/>
+          <AppNav user={localStorage.getItem('userName')}/>
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path='/posts/new' component={AddPostPage} />
-              <Route exact path='/posts' render={renderUserPosts} />
+              <Route exact path='/posts' render={renderPostList} />
               <Route exact path='/posts/:postID' component={PostDetailPage} />
               <Route exact path='/login' render={renderLogin} />
               <Route exact path='/logout' render={renderLogout} />
