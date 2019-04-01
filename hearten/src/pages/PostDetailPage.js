@@ -12,7 +12,8 @@ class PostDetailPage extends Component {
     }
   }
 
-  //Retrieve the specific post that has been requested to be viewed and include the user's token for authorization
+  //Retrieve the specific post that has been requested to be viewed 
+  //and include the user's token for authorization
   componentDidMount() {
     PostsAPI.fetchPostByID(this.props.match.params.postID, localStorage.getItem('userToken'))
       .then((jsonData) => {
@@ -26,7 +27,6 @@ class PostDetailPage extends Component {
   }
 
   render() {
-    console.log(this.state.post)
     return ( 
       <Grid container 
         direction = "column"

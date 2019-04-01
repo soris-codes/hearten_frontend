@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import AppNav from './AppNav'
 import { configure, shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import sinon from 'sinon'
 
 configure({ adapter: new Adapter() })
 
@@ -15,11 +16,10 @@ describe('AppNav tests', function() {
 
   })
 
-  it('should find Toolbar', () => {
+  it('should render a Button component', () => {
     const wrapper = shallow(<AppNav />)
-    // console.log(wrapper.debug())
-    expect(wrapper
-      .find('Toolbar').debug())
-      .toEqual('<Toolbar>')
+    expect(wrapper.find(Button)).to.have.length(1)
   })
+
+
 })

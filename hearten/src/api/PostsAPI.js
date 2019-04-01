@@ -1,7 +1,5 @@
 const API = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/posts/'
 
-const LOCAL = 'http://localhost:8000/api/posts/'
-
 const addPost = (postObject, token) => {
   return fetch(`${API}`, {
     headers: {

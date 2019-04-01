@@ -6,20 +6,13 @@ import Adapter from 'enzyme-adapter-react-16'
 
 configure({ adapter: new Adapter() })
 
-describe('Hearten tests', function() {
+describe('App', function() {
 
   it('renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<App />, div)
     ReactDOM.unmountComponentAtNode(div)
 
-  })
-
-  it('should find AppNav', () => {
-    const wrapper = shallow(<App />)
-    expect(wrapper
-      .find('AppNav').debug())
-      .toEqual('<AppNav />')
   })
 })
 

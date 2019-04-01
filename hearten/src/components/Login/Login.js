@@ -64,13 +64,11 @@ class Login extends Component {
       this.setState({
         isLoggedIn: true
       })
-      console.log('LOGIN: isLoggedIn')
     }
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('LOGIN SUBMITTED BY >>', event.target.elements[0].value)
 
     const credObject = {
       username: event.target.elements[0].value,
@@ -83,12 +81,10 @@ class Login extends Component {
       })  
       .then((user) => {
         this.props.handleLogin(user)
-        // this.props.history.push('/posts')
         this.updateLoginStatus()
       })
       .catch(err => {
-        console.error(err)
-        alert('Error logging in please try again')
+        alert(`Error logging in please try again. ${err}`)
         this.props.history.push('/')
       })
   }
@@ -98,7 +94,6 @@ class Login extends Component {
     const { classes } = this.props
 
     if(loggedIn === true) {
-      console.log('REDIRECTED at LOGIN')
       return (
         <Redirect to={'/posts'} />
       )

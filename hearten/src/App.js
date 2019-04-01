@@ -31,13 +31,9 @@ class App extends Component {
   handleLogin(user) {
     localStorage.setItem('userName', user.user.username)
     localStorage.setItem('userToken', user.token)
-    const token = localStorage.getItem('userToken')
-    console.log('APP: TOKEN!', token)
-    console.log('APP: LOGIN HANDLED!')
     this.setState({
       loggedIn: true
     })
-
   }
 
   //Logs off from API server so token is destroyed/invalidated
@@ -47,7 +43,6 @@ class App extends Component {
     UsersAPI.logout(token)
     localStorage.removeItem('userToken')
     localStorage.removeItem('userName')
-    console.log(localStorage.getItem('userName'))
     this.setState({
       loggedIn: false
     })
@@ -75,7 +70,6 @@ class App extends Component {
     }
 
     const renderLogout = () => {
-      this.handleLogout()
       return(<Redirect to={'/'}/>)
     }
 
@@ -87,7 +81,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <AppNav loggedIn={this.state.loggedIn}/>
+          <AppNav user={this.state.loggedIn} handleLogout={() => this.handleLogout()}/>
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />

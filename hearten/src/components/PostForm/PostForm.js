@@ -1,9 +1,5 @@
-import React, {
-  Component
-} from 'react'
-import {
-  Redirect
-} from 'react-router'
+import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
@@ -33,7 +29,6 @@ class PostForm extends Component {
   constructor(props){
     super(props)
     this.state = {
-      redirect: false,
       successfulSubmission: false,
       title: '',
       body: '',
@@ -44,7 +39,6 @@ class PostForm extends Component {
   getRandomImage() {
     fetch('https://source.unsplash.com/random/400x400')
       .then((response) => {
-        console.log(response.url)
         this.setState({
           imagePrompt: response.url
         })
@@ -72,7 +66,6 @@ class PostForm extends Component {
   handleChange(event) {
     const item = event.target.name
     const value = event.target.value
-    // console.log("Input >>", item, value )
     this.setState({
       [item]: value
     })
@@ -88,20 +81,28 @@ class PostForm extends Component {
     return postObject
   }
 
+  handleResponse(response) {
+    if(response.ok) {
+
+      this.setState({
+        successfulSubmission: true
+      })
+    }
+    else {
+      alert(`Unable to ${this.props.requestType} your post. ${response.statusText}.`)
+    }
+
+  }
+
   handleAdd(event) {
     event.preventDefault()
     const postObject = this.createPostObject()
     const token = localStorage.getItem('userToken')
-    console.log('ADD >>', postObject, token)
     PostsAPI.addPost(postObject, token)
       .then((response) => {
-        console.log(response)
-        this.setState({
-          redirect: true,
-          successfulSubmission: true
-        })
+        this.handleResponse(response)
       })
-      .catch(error => console.error(error))
+     
   }
 
   createEditedPostObject() {
@@ -113,36 +114,23 @@ class PostForm extends Component {
     if (post.body !== this.state.body) {
       postObject.body = this.state.body
     }
-    console.log('EDITED >>', postObject)
     return postObject
   }
 
   handleUpdate(event) {
     event.preventDefault()
-    console.log('UPDATE >>', event.target.value)
     const postObject = this.createEditedPostObject()
     PostsAPI.editPost(this.props.post.id, postObject, localStorage.getItem('userToken'))
       .then((response) => {
-        console.log(response)
-        this.setState({
-          redirect: true,
-          successfulSubmission: true
-        })
+        this.handleResponse(response)
       })
-      .catch(error => console.error(error))
   }
 
   handleDelete() {
-    console.log('DELETE >>', this.props.post.id)
     PostsAPI.deletePost(this.props.post.id, localStorage.getItem('userToken') )
       .then((response) => {
-        console.log(response)
-        this.setState({
-          redirect: true,
-          successfulSubmission: true
-        })
+        this.handleResponse(response)
       })
-      .catch(error => console.error(error))
   }
 
   renderForm() {
@@ -212,20 +200,11 @@ class PostForm extends Component {
   }
 
   render() {
-
-    const handleSuccess = () => {
-      return ( < Redirect to = {
-        '/posts'
-      }
-      />
-      ) 
-    }
-
     return ( 
       <div > {
         this.state.successfulSubmission ?
-          handleSuccess() : this.renderForm()
-      } </div>
+          <Redirect to = {'/posts'}/> : this.renderForm()} 
+      </div>
     )
   }
 }

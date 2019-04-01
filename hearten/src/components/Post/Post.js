@@ -10,6 +10,7 @@ import PostForm from '../PostForm/PostForm';
 
 const styles = theme => ({
   card: {
+    minWidth: 400,
     maxWidth: 600,
     marginBottom: 30,
     marginTop: 30,
@@ -49,7 +50,6 @@ class Post extends Component {
     const { classes } = this.props
     const post = this.props.post
     const date_created = new Date(post.created_on)
-    console.log(date_created)
 
     const renderPost = () => {
       return (

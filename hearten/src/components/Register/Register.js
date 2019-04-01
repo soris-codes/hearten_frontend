@@ -64,14 +64,12 @@ export class Register extends Component {
       password: event.target.elements[2].value,
       password2: event.target.elements[3].value,
     }
-    console.log('CREDENTIALS >>', credObject)
     
     UsersAPI.register(credObject)
       .then((response) => response.json())
       .then((user) => this.props.handleLogin(user))
       .catch(err => {
-        console.error(err)
-        alert('Error logging in please try again')
+        alert(`Error logging in please try again. ${err}`)
       })
       
     //Once a user has registered, a token is returned

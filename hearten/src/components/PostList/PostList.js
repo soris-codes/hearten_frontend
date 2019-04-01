@@ -30,7 +30,6 @@ class PostList extends Component {
 
   fetchAllPosts() {
     const token = localStorage.getItem('userToken')
-    console.log('POSTLIST - Token >>', token)
     if(token !== null){
       PostsAPI.fetchPosts(token)
         .then((jsonData) => {
@@ -39,8 +38,7 @@ class PostList extends Component {
           })
         })
         .catch(err => {
-          console.error(err)
-          alert('Error logging in please try again')
+          alert(`Error logging in please try again. ${err}`)
         })
     }
     
@@ -48,22 +46,10 @@ class PostList extends Component {
 
   componentDidMount() {
     this.fetchAllPosts()
-    // this.setState({
-    //   user: this.props.user
-    // })
+
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.state.user !== prevProps.user) {
-  //     this.fetchAllPosts()
-  //     this.setState({
-  //       user: this.props.user
-  //     })
-  //   }
-  // }
-
   render() {
-    console.log('POSTLIST: STATE POSTS >>', this.state.posts)
     const { classes } = this.props
 
     const greeting = () => {
@@ -91,10 +77,9 @@ class PostList extends Component {
       <Grid container direction="column">
         { this.state.posts.length > 0 ?   <React.Fragment><Grid item 
           className={classes.greeting}>{greeting()}
-        </Grid> {renderList()}</React.Fragment> : <Typography variant="h6" color="secondary" align="center"><br />Hey {localStorage.getItem('userName')} you don't have any recent posts... Create an entry!</Typography>}</Grid>
+        </Grid> {renderList()}</React.Fragment> : <Typography variant="h6" color="secondary" align="center"><br />Hey {localStorage.getItem('userName')} your space is looking empty... Create an entry!</Typography>}</Grid>
     )
   }  
 }
-
 
 export default withStyles(styles)(PostList)
