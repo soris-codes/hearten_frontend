@@ -68,7 +68,7 @@ class Post extends Component {
               {/* <Typography variant="body1" paragraph>
                 {post.body}  
               </Typography> */}
-              <Typography component="p" variant="body1">
+              <Typography component={'span'} variant="body2">
                 {post.body.split("\n").map((i, key) => {
                   return <p key={key}>{i}</p>;
                 })}
