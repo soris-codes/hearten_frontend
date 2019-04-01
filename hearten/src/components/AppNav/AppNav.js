@@ -17,12 +17,12 @@ const styles = {
 
 const AppNav = (props) => {
   const { classes } = props
-  // const user = props.user
   const user = localStorage.getItem('userName')
   console.log('APPNAV', user)
 
-  const authLinks = () => {
-    return (
+  const renderAuthLinks = () => {
+    if(user !== null) {
+      return (
       <>
       <Button
         label="Home"
@@ -43,7 +43,9 @@ const AppNav = (props) => {
         LOGOUT
       </Button>
     </>
-    )
+      )
+    }
+   
   }
   return (
     <div className={classes.root}>
@@ -55,7 +57,7 @@ const AppNav = (props) => {
             className={classes.grow}>
                 Hearten
           </Typography>
-          { user ? authLinks(): null}
+          { renderAuthLinks() }
         </Toolbar>
       </AppBar>
     </div>

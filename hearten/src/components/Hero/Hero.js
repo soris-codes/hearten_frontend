@@ -40,7 +40,7 @@ const Hero = props => {
             Hearten
           </Typography>
           <Typography component="h1" variant="h2" align="center" color="inherit" gutterBottom>
-            <img src={logo} />
+            <img src={logo} alt="Hearten Logo"/>
           </Typography>
           <Typography variant="h5" align="center" color="inherit" paragraph>
             Creative journaling to inspire confidence in your writing 

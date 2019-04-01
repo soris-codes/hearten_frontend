@@ -58,19 +58,15 @@ class Login extends Component {
     }
   }
   
-  updateState() {
-    console.log('LOGIN: isLoggedIn')
-    this.setState({
-      isLoggedIn: true
-    })
+  updateLoginStatus() {
+    const user = localStorage.getItem('userToken')
+    if(user !== null) {
+      this.setState({
+        isLoggedIn: true
+      })
+      console.log('LOGIN: isLoggedIn')
+    }
   }
-
-  // componentDidMount() {
-  //   const user = localStorage.getItem('userName')
-  //   if(user !== null) {
-  //     this.updateState()
-  //   }
-  // }
 
   handleSubmit(event) {
     event.preventDefault()
@@ -82,27 +78,29 @@ class Login extends Component {
     }
 
     UsersAPI.login(credObject)
-      .then((response) => response.json())
-      .then((user) => this.props.handleLogin(user))
+      .then((response) => {
+        return(response.json())
+      })  
+      .then((user) => {
+        this.props.handleLogin(user)
+        // this.props.history.push('/posts')
+        this.updateLoginStatus()
+      })
       .catch(err => {
         console.error(err)
         alert('Error logging in please try again')
         this.props.history.push('/')
       })
-
-    //Set isLoggedIn to true to be redirected to the user posts
-    this.updateState()  
   }
-
 
   render() {
     const loggedIn  = this.state.isLoggedIn
     const { classes } = this.props
 
     if(loggedIn === true) {
-      return(
-        <Redirect to={{pathname: '/posts',
-          state: { from: this.props.location}}} />
+      console.log('REDIRECTED at LOGIN')
+      return (
+        <Redirect to={'/posts'} />
       )
     }
 

@@ -24,7 +24,7 @@ class PostList extends Component {
     super(props)
     this.state = {
       posts: [],
-      user: ''
+      // user: ''
     }
   }
 
@@ -48,9 +48,9 @@ class PostList extends Component {
 
   componentDidMount() {
     this.fetchAllPosts()
-    this.setState({
-      user: this.props.user
-    })
+    // this.setState({
+    //   user: this.props.user
+    // })
   }
 
   // componentDidUpdate(prevProps) {
@@ -91,7 +91,7 @@ class PostList extends Component {
       <Grid container direction="column">
         { this.state.posts.length > 0 ?   <React.Fragment><Grid item 
           className={classes.greeting}>{greeting()}
-        </Grid> {renderList()}</React.Fragment> : <Typography variant="h6" color="secondary" align="center">Hey, you don't have any recent posts... Create an entry!</Typography>}</Grid>
+        </Grid> {renderList()}</React.Fragment> : <Typography variant="h6" color="secondary" align="center"><br />Hey, you don't have any recent posts... Create an entry!</Typography>}</Grid>
     )
   }  
 }

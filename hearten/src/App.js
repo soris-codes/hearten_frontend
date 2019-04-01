@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+
 import './App.css'
 import AppNav from './components/AppNav/AppNav'
 import HomePage from './pages/HomePage'
@@ -11,46 +12,45 @@ import Register from './components/Register/Register'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-
 import UsersAPI from './api/UsersAPI'
 
 class App extends Component {
-  constructor(props){
+
+  constructor(props) {
     super(props)
+  
     this.state = {
-      user: null
+      loggedIn: false
     }
   }
-
+  
   //This function is passed as a prop in both
   //the Login and Register components.
   //When a user has successfully been authenticated and has a 
-  //token, set state, save token and user in localStorage
+  //token, save token and user in localStorage
   handleLogin(user) {
-    console.log('APP: LOGIN HANDLED')
-    this.setState({
-      user: user
-    })
     localStorage.setItem('userName', user.user.username)
     localStorage.setItem('userToken', user.token)
-    // console.log('LOCAL USER >> ', localStorage.getItem('userName'))
-    const token = this.state.user.token
+    const token = localStorage.getItem('userToken')
     console.log('APP: TOKEN!', token)
+    console.log('APP: LOGIN HANDLED!')
+    this.setState({
+      loggedIn: true
+    })
+
   }
 
-  //Logs off from API server so token is destroyed/invalidated,
-  //updates state, and removes token/user from localStorage
+  //Logs off from API server so token is destroyed/invalidated
+  //and removes token/user from localStorage
   handleLogout () {
     const token = localStorage.getItem('userToken')
-    console.log('LOGOUT >>', token)
     UsersAPI.logout(token)
-      .then((response) => {
-        console.log('LOGOUT >>', response)
-        this.setState({user: null})
-      })
-      .catch(error => console.error(error))
     localStorage.removeItem('userToken')
     localStorage.removeItem('userName')
+    console.log(localStorage.getItem('userName'))
+    this.setState({
+      loggedIn: false
+    })
   }
 
   render() {
@@ -63,36 +63,31 @@ class App extends Component {
       return(
         <Register 
           history={props.history} 
-          handleLogin={(user) => this.handleLogin(user)} />
+          handleLogin={this.handleLogin.bind(this)} />
       )
     }
     const renderLogin = (props) => {
       return(
         <Login 
           history={props.history} 
-          handleLogin={(user) => this.handleLogin(user)} />
+          handleLogin={this.handleLogin.bind(this)} />
       )
     }
 
     const renderLogout = () => {
       this.handleLogout()
-      return(
-        <Redirect to={'/'}/>
-      )
+      return(<Redirect to={'/'}/>)
     }
 
-    const renderPostList = (props) => {
-      console.log('APP: Rendering post list >>', this.state.user)
-      return(
-        <PostList user={localStorage.getItem('userToken')} />)
+    const renderPostList = () => {
+      return(<PostList />)
     }
   
     return (
-
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <AppNav user={localStorage.getItem('userName')}/>
+          <AppNav loggedIn={this.state.loggedIn}/>
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />
