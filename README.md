@@ -3,7 +3,7 @@
 
 ### A creative writing journal app that provides visual and/or text prompts for journal entries.
 
-This repo contains the front-end code. It is deployed to Heroku at: _________
+This repo contains the front-end code. It is deployed to Heroku at: https://hearten-frontend.herokuapp.com/
 The back-end repo is [https://github.com/soris-codes/hearten_backend]
 
 ## Release 0 - MVP
