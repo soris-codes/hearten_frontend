@@ -1,12 +1,12 @@
 
+//Testing login/logoff functionality
+
 import UsersAPI from './UsersAPI'
 import fetchMock from 'jest-fetch-mock'
 require('isomorphic-fetch')
 
 const LOGIN = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/auth/login'
 const LOGOUT = 'https://cors-anywhere.herokuapp.com/https://hearten-api.herokuapp.com/api/auth/logout'
-
-
 
 describe('UserAPI testing to ensure login/logoff functionality', () => {
 

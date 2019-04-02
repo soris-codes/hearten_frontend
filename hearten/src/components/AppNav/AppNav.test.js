@@ -16,10 +16,4 @@ describe('AppNav tests', function() {
 
   })
 
-  it('should render a Button component', () => {
-    const wrapper = shallow(<AppNav />)
-    expect(wrapper.find(Button)).to.have.length(1)
-  })
-
-
 })

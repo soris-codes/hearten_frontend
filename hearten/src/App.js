@@ -16,13 +16,13 @@ import UsersAPI from './api/UsersAPI'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
   
-    this.state = {
-      loggedIn: false
-    }
-  }
+  //   this.state = {
+  //     loggedIn: false
+  //   }
+  // }
   
   //This function is passed as a prop in both
   //the Login and Register components.
@@ -31,9 +31,9 @@ class App extends Component {
   handleLogin(user) {
     localStorage.setItem('userName', user.user.username)
     localStorage.setItem('userToken', user.token)
-    this.setState({
-      loggedIn: true
-    })
+    // this.setState({
+    //   loggedIn: true
+    // })
   }
 
   //Logs off from API server so token is destroyed/invalidated
@@ -43,9 +43,10 @@ class App extends Component {
     UsersAPI.logout(token)
     localStorage.removeItem('userToken')
     localStorage.removeItem('userName')
-    this.setState({
-      loggedIn: false
-    })
+    // this.props.history.push('/')
+    // this.setState({
+    //   loggedIn: false
+    // })
   }
 
   render() {
@@ -81,7 +82,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <AppNav user={this.state.loggedIn} handleLogout={() => this.handleLogout()}/>
+          <AppNav handleLogout={this.handleLogout.bind(this)}/>
           <div>
             <Switch>
               <Route exact path='/' component={HomePage} />

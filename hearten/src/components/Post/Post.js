@@ -65,9 +65,6 @@ class Post extends Component {
               <Typography variant="caption" gutterBottom>
                 {date_created.toLocaleString()}  
               </Typography>
-              {/* <Typography variant="body1" paragraph>
-                {post.body}  
-              </Typography> */}
               <Typography component={'span'} variant="body2">
                 {post.body.split("\n").map((i, key) => {
                   return <p key={key}>{i}</p>;
