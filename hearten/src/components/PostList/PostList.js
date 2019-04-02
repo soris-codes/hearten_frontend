@@ -24,7 +24,6 @@ class PostList extends Component {
     super(props)
     this.state = {
       posts: [],
-      // user: ''
     }
   }
 
@@ -40,6 +39,7 @@ class PostList extends Component {
         .catch(err => {
           alert(`Error logging in please try again. ${err}`)
         })
+      console.log('PostList - FETCHING POSTS')
     }
     
   }

@@ -50,22 +50,22 @@ const styles = theme => ({
 
 class Login extends Component {
 
-  // constructor(props) {
-  //   super(props)
+  constructor(props) {
+    super(props)
   
-  //   this.state = {
-  //     isLoggedIn: false
-  //   }
-  // }
+    this.state = {
+      isLoggedIn: false
+    }
+  }
   
-  // updateLoginStatus() {
-  //   const user = localStorage.getItem('userToken')
-  //   if(user !== null) {
-  //     this.setState({
-  //       isLoggedIn: true
-  //     })
-  //   }
-  // }
+  updateLoginStatus() {
+    const user = localStorage.getItem('userToken')
+    if(user !== null) {
+      this.setState({
+        isLoggedIn: true
+      })
+    }
+  }
 
   handleSubmit(event) {
     event.preventDefault()
@@ -81,8 +81,8 @@ class Login extends Component {
       })  
       .then((user) => {
         this.props.handleLogin(user)
-        this.props.history.push('/posts')
-        // this.updateLoginStatus()
+        // this.props.history.push('/posts')
+        this.updateLoginStatus()
       })
       .catch(err => {
         alert(`Error logging in please try again. ${err}`)
@@ -91,14 +91,14 @@ class Login extends Component {
   }
 
   render() {
-    // const loggedIn  = this.state.isLoggedIn
+    const loggedIn  = this.state.isLoggedIn
     const { classes } = this.props
 
-    // if(loggedIn === true) {
-    //   return (
-    //     <Redirect to={'/posts'} />
-    //   )
-    // }
+    if(loggedIn === true) {
+      return (
+        <Redirect to={'/posts'} />
+      )
+    }
 
     return (
       <main className={classes.main}>

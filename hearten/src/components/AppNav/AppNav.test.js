@@ -16,4 +16,6 @@ describe('AppNav tests', function() {
 
   })
 
+  //Test that buttons/links render?
+
 })
