@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 const TimerDisplay = (props) => {
   return (
     
-    <Typography component="h1" variant="h6" color="secondary"
+    <Typography component="h1" variant="h6" color="primary"
       style={{justify: 'center'}}>
       {props.minutes}:{props.seconds}
     </Typography>

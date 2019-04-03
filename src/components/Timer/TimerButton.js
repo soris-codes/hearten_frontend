@@ -10,7 +10,7 @@ const TimerButton = (props) => {
     <Button 
       disabled={!props.minutes} 
       onClick={props.handleStart}
-      color="secondary" 
+      color="primary" 
       label="Start">
       <Alarm style={{fontSize: '36px'}} /> 
     </Button>

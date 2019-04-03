@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 
 import TimerDisplay from './TimerDisplay'
@@ -12,7 +11,7 @@ class Timer extends Component {
   
     this.state = {
       isOn: false,
-      minutes: '05',
+      minutes: '10',
       seconds: '00',
     }
 
@@ -46,13 +45,31 @@ class Timer extends Component {
         seconds: '0' + this.state.seconds,
       })
     }
-    this.secondsRemaining -= 1
+
+    if(this.secondsRemaining > 0) {
+      this.secondsRemaining -= 1
+    }
+    
+    if(this.secondsRemaining === 0 && this.state.minutes === 0){
+      this.stopTimer()
+    }
   }
 
   componentWillUnmount() {
     clearInterval(this.timerInterval)
+    this.setState({
+      isOn: false,
+      minutes: '',
+      seconds: '',
+    })
   }
 
+  stopTimer() {
+    this.setState({isOn: false}, 
+      clearInterval(this.timerInterval))
+    
+  }
+      
   startTimer() {
     this.timerInterval = setInterval(this.tick, 1000)
 
@@ -69,10 +86,15 @@ class Timer extends Component {
   render() {
     const isOn = this.state.isOn
 
+    const renderCompleteMessage = () => {
+      return(<p>10-Minute Interval Complete. Great job!</p>)}
+
     if(isOn) {
       return (
         <Grid container direction="row" justify = "center" alignItems = "center">
-          <TimerDisplay minutes={this.state.minutes} seconds={this.state.seconds} />
+          {this.state.minutes === '00' && this.state.seconds === '00' ? 
+            renderCompleteMessage() :  
+            <TimerDisplay minutes={this.state.minutes} seconds={this.state.seconds} />}
         </Grid>
       )
 

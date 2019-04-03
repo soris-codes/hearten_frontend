@@ -204,7 +204,8 @@ class PostForm extends Component {
               </form>
             </Paper>
           </Grid> 
-        </Grid>)
+        </Grid>
+      )
     default: alert('Invalid Form Request Type!')
       return ( <h1> ERROR! </h1>)
     }
@@ -222,6 +223,8 @@ class PostForm extends Component {
 
 PostForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  requestType: PropTypes.string.isRequired,
+  post: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(PostForm)
