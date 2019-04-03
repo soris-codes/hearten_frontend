@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { mount } from 'enzyme'
-import Post from './Post'
+// import React from 'react'
+// import ReactDOM from 'react-dom'
+// import { mount } from 'enzyme'
+// import Post from './Post'
 
 // Test that component renders without crashing
 

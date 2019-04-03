@@ -81,7 +81,6 @@ class Login extends Component {
       })  
       .then((user) => {
         this.props.handleLogin(user)
-        // this.props.history.push('/posts')
         this.updateLoginStatus()
       })
       .catch(err => {
