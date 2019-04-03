@@ -1,13 +1,15 @@
-//Testing for Timer Component
 import React from 'react'
 import { shallow } from 'enzyme'
 import Timer from './Timer'
 
-describe('10-Min Interval Timer', () => {
-  it('should render a <Grid>', () => {
-    const wrapper = shallow(<Timer />)
-    expect(wrapper.find('Grid').length).toEqual(1)
+describe('<Timer />', () => {
+
+
+  it('loads without crashing', () => {
+    const wrap = mount(<Timer />)
+    expect(wrap).toMatchSnapshot()
   })
+
   it('should render a <TimerDisplay>', () => {
     const wrapper = shallow(<Timer />)
     expect(wrapper.find('TimerDisplay').length).toEqual(1)
@@ -16,4 +18,5 @@ describe('10-Min Interval Timer', () => {
     const wrapper = shallow(<Timer />)
     expect(wrapper.find('TimerButton').length).toEqual(1)
   })
+
 })

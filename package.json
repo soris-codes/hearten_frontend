@@ -38,5 +38,5 @@
     "enzyme-to-json": "^3.3.5",
     "jest-fetch-mock": "^2.1.1"
   },
-  "homepage" : "http://soris-codes.github.io/hearten_frontend"
+  "homepage": "http://soris-codes.github.io/hearten_frontend"
 }
