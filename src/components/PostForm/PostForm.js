@@ -148,51 +148,62 @@ class PostForm extends Component {
           direction="row"
           justify="space-evenly"
           alignItems="center" >
-          <Paper className={classes.paper}> {
-            this.state.imagePrompt ? 
-              <img src = { this.state.imagePrompt }
-                alt = "Visual Prompt" /> :
-              <p> Image Loading... </p>} 
-          </Paper>
-          <form 
-            className={classes.form}
-            onSubmit = { this.props.post ? this.handleUpdate.bind(this) : this.handleAdd.bind(this)
-            }>
-            <TextField
-              id = "standard-name"
-              placeholder = "Title"
-              name = "title"
-              value = {
-                this.state.title
-              }
-              onChange = {
-                this.handleChange.bind(this)
-              }
-              margin = "normal"
-              fullWidth />
-            <TextField
-              id = "standard-textarea"
-              name = "body"
-              value = {
-                this.state.body
-              }
-              placeholder = "And so it begins..."
-              multiline
-              onChange = {
-                this.handleChange.bind(this)
-              }
-              margin = "normal"
-              variant = "outlined"
-              fullWidth />
-            <Button 
-              variant = "outlined"
-              type = "submit"
-              className={classes.submit}
-            > {
-                this.props.requestType
-              } 
-            </Button> 
-          </form> 
+          <Grid item>
+            <Paper className={classes.paper}> {
+              this.state.imagePrompt ? 
+                <img src = { this.state.imagePrompt }
+                  alt = "Visual Prompt" /> :
+                <p> Image Loading... </p>} 
+            </Paper>
+          </Grid>
+          <Grid item>
+            <Paper className={classes.paper}>
+              <form 
+                className={classes.form}
+                onSubmit = { this.props.post ? this.handleUpdate.bind(this) : this.handleAdd.bind(this)
+                }>
+                <TextField
+                  id = "standard-name"
+                  placeholder = "Title"
+                  name = "title"
+                  value = {
+                    this.state.title
+                  }
+                  onChange = {
+                    this.handleChange.bind(this)
+                  }
+                  margin = "normal"
+                  fullWidth
+                />
+                <TextField
+                  id = "standard-textarea"
+                  name = "body"
+                  value = {
+                    this.state.body
+                  }
+                  placeholder = "And so it begins..."
+                  multiline
+                  rows="11"
+                  onChange = {
+                    this.handleChange.bind(this)
+                  }
+                  margin = "normal"
+                  variant = "outlined"
+                  color = "primary"
+                  fullWidth
+                />
+                <Button 
+                  variant = "contained"
+                  color = "primary"
+                  type = "submit"
+                  className={classes.submit}
+                > {
+                    this.props.requestType
+                  } 
+                </Button> 
+              </form>
+            </Paper>
+          </Grid> 
         </Grid>)
     default: alert('Invalid Form Request Type!')
       return ( <h1> ERROR! </h1>)
@@ -201,7 +212,7 @@ class PostForm extends Component {
 
   render() {
     return ( 
-      <div > {
+      <div> {
         this.state.successfulSubmission ?
           <Redirect to = {'/posts'}/> : this.renderForm()} 
       </div>

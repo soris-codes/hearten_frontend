@@ -13,6 +13,7 @@ import Register from './components/Register/Register'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import UsersAPI from './api/UsersAPI'
+import Timer from './components/Timer/Timer'
 
 class App extends Component {
 
@@ -34,7 +35,6 @@ class App extends Component {
     this.setState({
       loggedIn: true
     })
-    console.log('LOGIN - ', user)
   }
 
   //Logs off from API server so token is destroyed/invalidated
@@ -47,7 +47,6 @@ class App extends Component {
     this.setState({
       loggedIn: false
     })
-    console.log('LOGOUT - ')
   }
 
   render() {
@@ -78,6 +77,10 @@ class App extends Component {
     const renderPostList = () => {
       return(<PostList />)
     }
+
+    const renderTimer = () => {
+      return (<div><Timer /></div>)
+    }
   
     return (
       <React.Fragment>
@@ -93,6 +96,7 @@ class App extends Component {
               <Route exact path='/login' render={renderLogin} />
               <Route exact path='/logout' render={renderLogout} />
               <Route exact path='/register' render={renderRegister} />
+              <Route exact path='/timer' render={renderTimer} />
               <Route render={renderPageNotFound}/>
             </Switch>
           </div>
