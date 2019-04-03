@@ -3,7 +3,7 @@
 
 ### A creative writing journal app that provides visual and/or text prompts for journal entries.
 
-This repo contains the front-end code. It is deployed to Heroku at: _________
+This repo contains the front-end code. It is deployed to Heroku at: https://hearten-frontend.herokuapp.com/
 The back-end repo is [https://github.com/soris-codes/hearten_backend]
 
 ## Release 0 - MVP
@@ -13,6 +13,9 @@ The back-end repo is [https://github.com/soris-codes/hearten_backend]
 
 ## Release 1
 - A user can create an account and authenticate to create/save entries
+
+## Release 2
+- A user can click on a 10-minute interval timer for timed writing exercises
 
 
 ## Future Releases
@@ -24,9 +27,6 @@ The back-end repo is [https://github.com/soris-codes/hearten_backend]
     * visual prompt
     * story starter text prompt
     * both image and story starter
-    
-- Add timer component
-    * A user can optionally set a timer for timed writing entries
     
 - A user can share entries on social media platforms
 
