@@ -14,6 +14,9 @@ The back-end repo is [https://github.com/soris-codes/hearten_backend]
 ## Release 1
 - A user can create an account and authenticate to create/save entries
 
+## Release 2
+- A user can click on a 10-minute interval timer for timed writing exercises
+
 
 ## Future Releases
 - Add text prompt option
@@ -24,9 +27,6 @@ The back-end repo is [https://github.com/soris-codes/hearten_backend]
     * visual prompt
     * story starter text prompt
     * both image and story starter
-    
-- Add timer component
-    * A user can optionally set a timer for timed writing entries
     
 - A user can share entries on social media platforms
 
