@@ -77,10 +77,6 @@ class App extends Component {
     const renderPostList = () => {
       return(<PostList />)
     }
-
-    const renderTimer = () => {
-      return (<div><Timer /></div>)
-    }
   
     return (
       <React.Fragment>
@@ -96,7 +92,6 @@ class App extends Component {
               <Route exact path='/login' render={renderLogin} />
               <Route exact path='/logout' render={renderLogout} />
               <Route exact path='/register' render={renderRegister} />
-              <Route exact path='/timer' render={renderTimer} />
               <Route render={renderPageNotFound}/>
             </Switch>
           </div>
