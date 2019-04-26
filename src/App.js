@@ -13,7 +13,6 @@ import Register from './components/Register/Register'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import UsersAPI from './api/UsersAPI'
-import Timer from './components/Timer/Timer'
 
 class App extends Component {
 
